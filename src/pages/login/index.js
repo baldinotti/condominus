@@ -5,18 +5,35 @@ import styles from "./style"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 //import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
+let statusUserAtual;
+let condAtual;
+
 export default function Login({navigation}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorLogin, setErrorLogin] = useState("");
-
+    const database = firebase.firestore();
     const loginFirebase = ()=> {
 
     //const auth = getAuth();
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
     let user = userCredential.user;
-    navigation.navigate("Custos", {idUser: user.uid})
+
+    database.collection("cond").onSnapshot((query) => {
+        query.forEach((doc) => {
+          if (doc.id === user.email) {
+            condAtual = (doc.data().cod)
+            
+            statusUserAtual = (doc.data().estadoUser)
+            console.log(statusUserAtual)
+          }
+          console.log(user)
+          });
+          navigation.navigate("Dashboard", {idUser: user.uid, statusUserAtual: statusUserAtual, condAtual: condAtual})
+        })
+
+    
   })
   .catch((error) => {
     setErrorLogin(true)
@@ -26,19 +43,25 @@ export default function Login({navigation}){
 
     }
 
-    useEffect(()=>{
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-              // User is signed in
-              const uid = user.uid;
-              navigation.navigate("Custos", {idUser: user.uid})
-            } else {
-              // User is signed out
-              // ...
-            }
-          });
-    },[]   
-    )
+    function leftPad(value, totalWidth, paddingChar) {
+        var length = totalWidth - value.toString().length + 1;
+        return Array(length).join(paddingChar || '0') + value;
+      };
+
+ 
+    // useEffect(()=>{
+    //     firebase.auth().onAuthStateChanged(function (user) {
+    //         if (user) {
+    //           // User is signed in
+    //           const uid = user.uid;
+    //           navigation.navigate("Dashboard", {idUser: user.uid})
+    //         } else {
+    //           // User is signed out
+    //           // ...
+    //         }
+    //       });
+    // },[]   
+    // )
 
     return(
         //função para teclado não cobrir os text input, verifica se ios e se não for vai ser android, necessario para funcionamento
@@ -95,12 +118,32 @@ export default function Login({navigation}){
             }
 
             <Text style={styles.registration}>
-            Não tem registro?
+            Não tem registro? 
                 <Text 
                 style={styles.linkSubscribe}
                 onPress={()=> navigation.navigate("NewUser")}
                 >
                     Se registrar agora
+                </Text>
+            </Text>
+
+            <Text style={styles.registration}>
+            Não tem um condomínio registrado? 
+                <Text 
+                style={styles.linkSubscribe}
+                onPress={()=> navigation.navigate("NewCond")}
+                >
+                    Registrar novo condomínio
+                </Text>
+            </Text>
+
+            <Text style={styles.registration}>
+            Esqueceu sua senha? 
+                <Text 
+                style={styles.linkSubscribe}
+                onPress={()=> navigation.navigate("Esqueci")}
+                >
+                    Solicitar nova senha
                 </Text>
             </Text>
 

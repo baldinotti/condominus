@@ -11,8 +11,7 @@ const styles = StyleSheet.create({
     color: "#1046c4",
     fontSize:48,
     maginBottom: 10,
-    fontWeight:"bold",
-    textAlign: "center"
+    fontWeight:"bold"
     },
     input:{
         width:300,
@@ -50,10 +49,57 @@ const styles = StyleSheet.create({
     registration:{
         marginTop:20
     },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        //alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+      button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+      buttonOpen: {
+        backgroundColor: "#F194FF",
+      },
+      buttonClose: {
+        backgroundColor: "#1046c4",
+      },
+      buttonDelete: {
+        backgroundColor: "#f21505",
+      },
+      buttonHomolog: {
+        backgroundColor: "#2cfc03",
+      },  
+      modalText: {
+            marginBottom: 15,
+            textAlign: "center"
+          },
     linkLogin:{
         color:"#1046c4",
         fontSize:16
-    }
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      textStyleExcluir: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+    
     }
     );
     export default styles

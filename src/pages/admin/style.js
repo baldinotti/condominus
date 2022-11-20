@@ -50,7 +50,7 @@ flat:{
   height:60,
   position:"absolute",
   bottom: 30,
-  right:20,
+  right:180,
   backgroundColor:"#1046c4",
   borderRadius:50,
   justifyContent:"center",
@@ -58,19 +58,10 @@ flat:{
  },
  title: {
   color: "#1046c4",
-  fontSize:36,
+  fontSize:48,
   maginBottom: 10,
-  fontWeight:"bold",
-  borderRadius:50
+  fontWeight:"bold"
   },
-  titleAprova: {
-    color: "#1046c4",
-    fontSize:48,
-    maginBottom: 10,
-    fontWeight:"bold",
-    textAlign: "center",
-    alignItems: "center"
-    },
  buttonWarnings:{
   width:60,
   height:60,
@@ -135,6 +126,7 @@ buttonOpen: {
 },
 buttonClose: {
   backgroundColor: "#1046c4",
+  marginTop: 15
 },
 buttonDelete: {
   backgroundColor: "#f21505",
@@ -144,6 +136,18 @@ buttonHomolog: {
   backgroundColor: "#2cfc03",
   marginTop: 15
 },  
+buttonAdmin: {
+    backgroundColor: "#2cfc03",
+    marginTop: 15
+  },  
+  buttonMorador: {
+    backgroundColor: "#2cfc03",
+    marginTop: 15
+  },  
+  buttonReprovado: {
+    backgroundColor: "#f21505",
+    marginTop: 15
+  },  
 textStyle: {
   color: "white",
   fontWeight: "bold",

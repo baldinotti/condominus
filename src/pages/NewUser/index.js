@@ -4,18 +4,40 @@ import firebase from "../../config/firebase"
 import styles from "./style"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
+let auxCodCond;
+
 export default function NewUser({ navigation }){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [codCond, setCodCond] = useState("");
+    const [nome, setNome] = useState("");
+    const [sobrenome, setSobrenome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [torre, setTorre] = useState("");
+    const [numeroCasa, setNumeroCasa] = useState("");
     const [errorRegister, setErrorRegister] = useState("");
+    const database = firebase.firestore();
 
     const register = () => {
     
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
     let user = userCredential.user;
-    navigation.navigate("Custos", {idUser: user.uid})
+    console.log(user.email)
+    database.collection('cond').doc(user.email).set({
+        cod : auxCodCond,
+        estadoUser : "Em Aprovação",
+        nome: nome,
+        sobrenome: sobrenome,
+        cpf: cpf,
+        telefone : telefone,
+        torre : torre,
+        numeroCasa : numeroCasa,
+        optNotification : "Ativado"
+      })
+    navigation.navigate("Custos", {idUser: user.uid});
     
   })
   .catch((error) => {
@@ -23,7 +45,10 @@ export default function NewUser({ navigation }){
     let errorCode = error.code;
     let errorMessage = error.message;
   });   
-    }
+
+
+  
+}
 
     return(
 <KeyboardAvoidingView
@@ -46,14 +71,55 @@ export default function NewUser({ navigation }){
             onChangeText={(text) => setPassword(text)}
             value={password}
             />
-            {/* <TextInput
+            <TextInput
             style={styles.input}
-            secureTextEntry={true}
-            placeholder="Confirme sua senha"
+            placeholder="Informe o código do seu Condomínio"
             type="text"
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            /> */}
+            onChangeText={(text) => setCodCond(text)}
+            value={codCond}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe seu nome"
+            type="text"
+            onChangeText={(text) => setNome(text)}
+            value={nome}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe seu sobrenome"
+            type="text"
+            onChangeText={(text) => setSobrenome(text)}
+            value={sobrenome}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe seu CPF"
+            type="text"
+            onChangeText={(text) => setCpf(text)}
+            value={cpf}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe seu telefone"
+            type="text"
+            onChangeText={(text) => setTelefone(text)}
+            value={telefone}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe o bloco/torre/ala da sua residência"
+            type="text"
+            onChangeText={(text) => setTorre(text)}
+            value={torre}
+            />
+            <TextInput
+            style={styles.input}
+            placeholder="Informe o número da sua residência"
+            type="text"
+            onChangeText={(text) => setNumeroCasa(text)}
+            value={numeroCasa}
+            />
             {errorRegister === true
             ?
             <View style={styles.contentAlert}>
@@ -68,7 +134,7 @@ export default function NewUser({ navigation }){
             <View/>
             }
 
-            { email === "" || password === ""
+            { email === "" || password === "" || codCond === "" || nome === "" || sobrenome === "" || telefone === "" || torre === "" || cpf === "" || numeroCasa === ""
             ?
             <TouchableOpacity
             disabled={true}
@@ -79,7 +145,7 @@ export default function NewUser({ navigation }){
             :
             <TouchableOpacity
             style={styles.ButtonRegister}
-            onPress={register}
+            onPress={() =>{auxCodCond=codCond;register();console.log(auxCodCond)}}
             >
             <Text style={styles.textButtonRegister}>Cadastrar</Text>
             </TouchableOpacity>
