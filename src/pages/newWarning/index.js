@@ -9,15 +9,28 @@ export default function NewWarning({ navigation }, props) {
     const [data, setData] = useState(null);
     const [responsavel, setResponsavel] = useState(null);
     const database = firebase.firestore();
-  
+    const user = firebase.auth().currentUser.email
+    
     function addWarning(){
+      let condAtual;
+      
+      database.collection("cond").onSnapshot((query) => {
+             query.forEach((doc) => {
+                  if (doc.id === user){
+                     condAtual = (doc.data().cod)
+                  }
+                });
       database.collection('Avisos').add({
         description: description,
-        data : data,
-        responsavel : responsavel
+        responsavel : user,
+        data: data,
+        cod : condAtual
       })
       navigation.navigate("Warnings");
-    }
+    
+                         
+  })
+};
 
     return(
         <View style={styles.container}>

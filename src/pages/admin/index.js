@@ -46,10 +46,10 @@ export default function Admin({ navigation }) {
           condAtual = (doc.data().cod)
         }
 
-        database.collection("Custos").onSnapshot((query) => {
+        database.collection("cond").onSnapshot((query) => {
           const list = [];
           query.forEach((doc) => {
-            if (doc.data().id.includes(filtro)) {
+            if (doc.id.includes(filtro)) {
               if (condAtual === doc.data().cod) {
                 list.push({ ...doc.data(), id: doc.id });
               }

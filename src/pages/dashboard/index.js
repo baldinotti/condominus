@@ -5,7 +5,7 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./style";
 import { TextInput } from "react-native-gesture-handler";
 
-let statusUserAtual;
+
 let condAtual;
 let nome;
 let sobrenome;
@@ -21,7 +21,7 @@ export default function Dashboard({ navigation, route }) {
   const user = firebase.auth().currentUser.email
   const statusUserAtual = route.params.statusUserAtual;
   const condAtual = route.params.condAtual;
-  console.log(statusUserAtual)
+  console.log(route.params)
 
   function logout() {
     firebase.auth().signOut().then(() => {

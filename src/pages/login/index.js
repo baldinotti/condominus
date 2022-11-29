@@ -26,9 +26,7 @@ export default function Login({navigation}){
             condAtual = (doc.data().cod)
             
             statusUserAtual = (doc.data().estadoUser)
-            console.log(statusUserAtual)
           }
-          console.log(user)
           });
           navigation.navigate("Dashboard", {idUser: user.uid, statusUserAtual: statusUserAtual, condAtual: condAtual})
         })

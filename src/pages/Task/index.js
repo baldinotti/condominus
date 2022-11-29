@@ -47,14 +47,10 @@ export default function Task({ navigation }) {
 
   function filtrar(filtro) {
     setFiltro(filtro)
-
-    
-
     database.collection("cond").onSnapshot((query) => {
       query.forEach((doc) => {
         if (doc.id === user) {
           condAtual = (doc.data().cod)
-          console.log(condAtual)
         }
 
         database.collection("Custos").onSnapshot((query) => {
@@ -262,8 +258,7 @@ export default function Task({ navigation }) {
               );
 
             } } /></View>
-            <View></View>
-            <View>
+            
             <TouchableOpacity
               style={styles.buttonNewTask}
               onPress={() => navigation.navigate("Adicionar Custo")}
@@ -310,7 +305,6 @@ export default function Task({ navigation }) {
       :
       <></>
 } */}
-</View>
 
           </>
 }</View>

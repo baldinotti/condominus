@@ -21,10 +21,10 @@ const ToggleSwitchExample = () =>{
     })
     return(
         <View style ={styles.container}>
-            <Text>Toggle Switch</Text>
+            <Text>Deseja receber notificações por e-mail?</Text>
             <Switch value={switchOn} onValueChange={() => {
                 setSwitchOn(!switchOn)
-                console.log(!switchOn)
+                //console.log(!switchOn)
                 database.collection('cond').doc(user).update({
                     optNotification: !switchOn
                   })} }/>

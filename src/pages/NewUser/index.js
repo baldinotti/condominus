@@ -37,7 +37,7 @@ export default function NewUser({ navigation }){
         numeroCasa : numeroCasa,
         optNotification : "Ativado"
       })
-    navigation.navigate("Custos", {idUser: user.uid});
+    navigation.navigate("Dashboard", {idUser: user.uid, statusUserAtual: "Em Aprovação", condAtual: auxCodCond});
     
   })
   .catch((error) => {

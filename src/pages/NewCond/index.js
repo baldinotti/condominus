@@ -87,6 +87,7 @@ export default function NewCond({ navigation }) {
             numeroCasa : numeroCasa,
             optNotification : "Ativado"
         })
+        navigation.navigate("Dashboard", {idUser: user.uid, statusUserAtual: "Administrador", condAtual: auxNovoCond});
 }
 
     return (
